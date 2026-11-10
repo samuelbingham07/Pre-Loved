@@ -12,6 +12,7 @@ public class Interactor : MonoBehaviour
     public TextMeshProUGUI hoverText;
 
     IInteractable currentInteractable;
+    IInteractable lastInteractable;
 
     private void OnEnable()
     {
@@ -26,6 +27,7 @@ public class Interactor : MonoBehaviour
     void Update()
     {
         FindInteractable();
+        UpdateHover();
         ShowHoverText();
 
         if (clickAction.triggered && currentInteractable != null)
@@ -40,14 +42,18 @@ public class Interactor : MonoBehaviour
     {
         currentInteractable = null;
 
-        // Ignore the mouse while the screen is fading between views
-        bool fading = false;
-        if (ViewManager.instance != null)
+        // Ignore the closet while the screen is fading or the viewer is open
+        bool blocked = false;
+        if (ViewManager.instance != null && ViewManager.instance.IsFading())
         {
-            fading = ViewManager.instance.IsFading();
+            blocked = true;
+        }
+        if (InspectViewer.instance != null && InspectViewer.instance.IsOpen())
+        {
+            blocked = true;
         }
 
-        if (fading == false)
+        if (blocked == false)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
@@ -59,6 +65,26 @@ public class Interactor : MonoBehaviour
                     currentInteractable = interactable;
                 }
             }
+        }
+    }
+
+    // If the mouse moved to a different object this frame,
+    // tell the old one it lost hover and the new one it gained it.
+    void UpdateHover()
+    {
+        if (currentInteractable != lastInteractable)
+        {
+            if (lastInteractable != null)
+            {
+                lastInteractable.SetHover(false);
+            }
+
+            if (currentInteractable != null)
+            {
+                currentInteractable.SetHover(true);
+            }
+
+            lastInteractable = currentInteractable;
         }
     }
 

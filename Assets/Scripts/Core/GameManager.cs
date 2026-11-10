@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     // (Play On Awake + Loop checked). One-shot sounds play through it too.
     AudioSource managerAudio;
 
+    // The garment the player opened last (empty until they pick one)
+    public GarmentData selectedGarment;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,6 +34,18 @@ public class GameManager : MonoBehaviour
         if (clip != null)
         {
             managerAudio.PlayOneShot(clip);
+        }
+    }
+
+    public bool HasPickedGarment()
+    {
+        if (selectedGarment != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

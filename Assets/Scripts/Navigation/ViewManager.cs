@@ -6,7 +6,7 @@ public class ViewManager : MonoBehaviour
 {
     public static ViewManager instance;
 
-    // Drag the view parents here in order: Rack, Shelves, Drawer, Mirror
+    // Drag the view parents here in order: Closet, Mirror
     public List<GameObject> views = new();
     public int startView = 0;
 

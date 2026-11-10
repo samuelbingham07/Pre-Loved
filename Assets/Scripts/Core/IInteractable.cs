@@ -4,4 +4,7 @@ public interface IInteractable
 {
     void Interact();
     string InteractText();
+
+    // Called with true when the mouse moves onto the object, false when it leaves
+    void SetHover(bool isHovered);
 }

@@ -4,10 +4,8 @@ using TMPro;
 
 public class Interactor : MonoBehaviour
 {
-    // In the Inspector, add a binding: Left Button [Mouse]
     public InputAction clickAction;
 
-    // Small label that shows what the mouse is over (optional)
     public GameObject hoverPanel;
     public TextMeshProUGUI hoverText;
 
@@ -36,13 +34,10 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    // Send a ray from the mouse into the scene and remember
-    // the first object we hit that is an IInteractable.
     void FindInteractable()
     {
         currentInteractable = null;
 
-        // Ignore the closet while the screen is fading or the viewer is open
         bool blocked = false;
         if (ViewManager.instance != null && ViewManager.instance.IsFading())
         {
@@ -68,8 +63,6 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    // If the mouse moved to a different object this frame,
-    // tell the old one it lost hover and the new one it gained it.
     void UpdateHover()
     {
         if (currentInteractable != lastInteractable)

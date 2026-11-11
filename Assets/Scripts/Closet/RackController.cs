@@ -1,18 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class RackController : MonoBehaviour
 {
-
     public SpriteRenderer closetRenderer;
-
 
     public List<Sprite> frames = new();
 
-
     public List<GarmentData> frameGarments = new();
-
 
     public GarmentHanger pickZone;
 
@@ -25,11 +20,9 @@ public class RackController : MonoBehaviour
         ShowFrame();
     }
 
-
     public void Slide(int direction)
     {
         int newFrame = currentFrame + direction;
-
 
         if (newFrame >= 0 && newFrame < frames.Count)
         {
@@ -45,7 +38,6 @@ public class RackController : MonoBehaviour
         {
             closetRenderer.sprite = frames[currentFrame];
         }
-
 
         if (currentFrame < frameGarments.Count)
         {

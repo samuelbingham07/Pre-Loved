@@ -6,11 +6,9 @@ public class ViewManager : MonoBehaviour
 {
     public static ViewManager instance;
 
-    // Drag the view parents here in order: Closet, Mirror
     public List<GameObject> views = new();
     public int startView = 0;
 
-    // A full-screen black UI Image that covers the swap
     public Image fadeImage;
     public float fadeTime = 0.25f;
 
@@ -40,7 +38,6 @@ public class ViewManager : MonoBehaviour
 
     void Update()
     {
-        // Step 1: fade to black. When the timer runs out, swap views.
         if (fadingOut)
         {
             fadeTimer -= Time.deltaTime;
@@ -54,7 +51,6 @@ public class ViewManager : MonoBehaviour
                 fadeTimer = fadeTime;
             }
         }
-        // Step 2: fade back in to the new view.
         else if (fadingIn)
         {
             fadeTimer -= Time.deltaTime;
@@ -68,7 +64,6 @@ public class ViewManager : MonoBehaviour
         }
     }
 
-    // Called by ViewArrow when clicked
     public void GoToView(int index)
     {
         if (IsFading() == false && index != currentView && index >= 0 && index < views.Count)
@@ -91,7 +86,6 @@ public class ViewManager : MonoBehaviour
         }
     }
 
-    // Turn on one view and turn off all the others
     void ShowOnly(int index)
     {
         for (int i = 0; i < views.Count; i++)

@@ -1,11 +1,9 @@
 using UnityEngine;
 
-// Put this on the small arrows under the rack (needs a BoxCollider2D).
 public class RackArrow : MonoBehaviour, IInteractable
 {
     public RackController rack;
 
-    // 1 = next frame, -1 = previous frame
     public int direction = 1;
     public string label = "";
 

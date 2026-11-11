@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// An invisible click area over the mirror in the background (needs a BoxCollider2D).
-// Clicking it "tries on" the picked garment by showing the photo of me wearing it.
 public class MirrorSpot : MonoBehaviour, IInteractable
 {
     public string label = "Try it on";
